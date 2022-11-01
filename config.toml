@@ -1,0 +1,5 @@
+#enter your bot token get it from @botfather on telegram
+bot_token = "enter here"
+
+#enter ur telegram id if you dont know how to get it use @getmy_idbot on telegram
+owner = "enter here"
