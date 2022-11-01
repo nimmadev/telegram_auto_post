@@ -240,10 +240,10 @@ async def stoppost(update,context):
 		except BaseException:await A.message.reply_text('post stopped')
 async def postset(update,context):A=update;B=A.message.from_user;logger.info('User %s pressed post setting.',B.first_name);await A.message.reply_text('ENTER THE NUMBER OF POST YOU WANT IN A LOOP\n\nthis will only change for /send command \n press /cancel if you dont want to change it.');return SETPOST
 async def postset1(update,context):
-	B=update;A=B.message.text
+	B=update;A=B.message.text;global post_count
 	try:A=int(A)
 	except:pass
-	if isinstance(A,int):D=int(A);C=[[_D,_E],[_F,_G]];E=ReplyKeyboardMarkup(C);await B.message.reply_text(f"Post count Changed to : {str(A)}",reply_markup=ReplyKeyboardMarkup(C,resize_keyboard=_A,one_time_keyboard=_A,input_field_placeholder=_M));return ConversationHandler.END
+	if isinstance(A,int):post_count=int(A);C=[[_D,_E],[_F,_G]];D=ReplyKeyboardMarkup(C);await B.message.reply_text(f"Post count Changed to : {str(A)}",reply_markup=ReplyKeyboardMarkup(C,resize_keyboard=_A,one_time_keyboard=_A,input_field_placeholder=_M));return ConversationHandler.END
 	else:await B.message.reply_text('enter digits only')
 async def timeset(update,context):A=update;B=A.message.from_user;logger.info('User %s pressed time.',B.first_name);await A.message.reply_text('ENTER THE TIME FORMAT Hours, Minutes, Seconds \n\nthis will only change for /send command \n press /cancel if you dont want to change it.');return SETTIME
 async def timeset1(update,context):
