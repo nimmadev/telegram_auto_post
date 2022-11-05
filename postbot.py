@@ -1,277 +1,265 @@
-Ah='User %s started the post.'
-Ag='User %s canceled the conversation.'
-Af='below is the post number for your post\n\nuse below  command to send post to ur group \n\ntime is in seconds'
-Ae='skiping link as u entered incorrect link'
-Ad='Please enter link name for second button\n\n or press /done'
-Ac='send the photo 📸\n\n/skip the Photo'
-Ab='User %s seaching post'
-Aa=isinstance
-A7='but bot👇\u200c\u200c'
-A6='Send Link'
-A5='linkname'
-A4=range
-r='working'
-q='✅Done'
-j='setting'
-i='type the text and send! ✍️\n\n/skip the Text'
-h='t.me/r5pro'
-g='Click Here To Buy'
-f=int
-a='postid'
-Z='video_id'
-Y='photo_id'
-W='text'
-V='Setting'
-S='Search Old Post'
-N='🤖 Buy bot'
-M='📝 edit post'
-L='📌 make new post'
-K='link'
-H=False
-F=str
-E=True
-A=BaseException
-import logging as k,toml
+_b='User %s started the post.'
+_a='User %s canceled the conversation.'
+_Z='below is the post number for your post\n\nuse below  command to send post to ur group \n\ntime is in seconds'
+_Y='skiping link as u entered incorrect link'
+_X='Please enter link name for second button\n\n or press /done'
+_W='send the photo 📸\n\n/skip the Photo'
+_V='User %s seaching post'
+_U='but bot👇\u200c\u200c'
+_T='Send Link'
+_S='linkname'
+_R='working'
+_Q='✅Done'
+_P='setting'
+_O='type the text and send! ✍️\n\n/skip the Text'
+_N='t.me/r5pro'
+_M='Click Here To Buy'
+_L='postid'
+_K='video_id'
+_J='photo_id'
+_I='Setting'
+_H='Search Old Post'
+_G='text'
+_F='🤖 Buy bot'
+_E='📝 edit post'
+_D='📌 make new post'
+_C='link'
+_B=False
+_A=True
+import logging,toml
 from pathlib import Path
 from random import randint
 from html import escape
 import json
 from telegram.constants import ParseMode
-from asyncio import sleep as s
-from telegram import InlineKeyboardMarkup as T,ReplyKeyboardRemove as t,PassportElementErrorTranslationFile,__version__ as Ai
+from asyncio import sleep
+from telegram import InlineKeyboardMarkup,ReplyKeyboardRemove,PassportElementErrorTranslationFile,__version__ as TG_VER
+import sys
+sys.setrecursionlimit(20000000)
 try:from telegram import __version_info__
 except ImportError:__version_info__=0,0,0,0,0
 if __version_info__<(20,0,0,'alpha',1):raise RuntimeError(f"install python-telegram-bot --pre")
 import base64
-from telegram import ReplyKeyboardMarkup as G,ReplyKeyboardRemove as t,Update,InlineKeyboardButton as P,InlineQueryResultArticle,InputTextMessageContent,Bot
-from telegram.ext import Application as A8,CommandHandler as I,ContextTypes,ConversationHandler as J,MessageHandler as C,filters as B,InlineQueryHandler
-def A9(n):A=10**(n-1);B=10**n-1;return randint(A,B)
-k.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=k.INFO)
-O=k.getLogger(__name__)
-Aj=Path.cwd()
-u,b,Q,U,l=A4(5)
-v,w,x=A4(3)
-y=A4(1)
-X=1
-c=200000
-with open('config.toml','r')as AA:
-	z=toml.load(AA)
-	try:AB=z['bot_token'];R=F(z['owner'])
-	except A:print('fill the config.toml');exit()
-D={}
-m='dGhpcyBpcyB0aGUgZnJlZSB2ZXJzaW9uIG9mICBib3QgbWFkZSBieSBAcjVwcm8='
-m=base64.b64decode(m)
-n=F(m.decode())
-async def AC(update,context):
-	A=update
-	if F(A.effective_user.id)==F(R):B=[[L,M],[N,V],[S]];await A.message.reply_text('✨! this is free version of bot contact @r5pro',reply_markup=G(B,resize_keyboard=E,one_time_keyboard=E,input_field_placeholder='welcome'))
-	else:B=[[P(g,h)]];C=T(B);await A.message.reply_text('To Buy BOT Contact : @r5pro\u200c\u200c',reply_markup=C)
-async def AD(update,context):A=update;B=A.message.from_user;O.info(Ab,B.first_name);await A.message.reply_text('enter any sentence or word to serch from posts\n /cancel to stop searching');return y
-async def AE(update,context):
-	A=update;C=A.message.text;F=A.message.from_user;O.info(Ab,F.first_name);B=H
-	for (G,I) in D.items():
-		if C.lower()in I[W].lower():await A.message.reply_text(f"found a matching post {G}");B=E
-	if B==H:await A.message.reply_text(f"no matching post found")
-	return J.END
-async def AF(update,context):A=[[P(g,h)]];B=T(A);await update.message.reply_text('contact @r5pro\u200c\u200c',reply_markup=B)
-async def AG(update,context):
-	A=update
-	if F(A.effective_user.id)==F(R):context.user_data[K]=[];B=[[L,M],[N,q]];await A.message.reply_text(Ac,reply_markup=G(B,resize_keyboard=E,one_time_keyboard=E));return b
-	else:await A.message.reply_text(f"enter coreect user id in config.toml\n your ID is  : {F(A.effective_user.id)}")
-async def AH(update,context):
-	A=update
-	if F(A.effective_user.id)==F(R):await A.message.reply_text('send the post number.\n you want to edit');return u
-async def AI(update,context):A=update;context.user_data[Y]=A.message.photo[-1].file_id;await A.message.reply_text(i);return Q
-async def AJ(update,context):
-	A=update;B=f"video file size should be less then 20mb";C=23000000
-	if A.message.video.file_size>C:await A.message.reply_text(B)
-	else:context.user_data[Z]=A.message.video.file_id;await A.message.reply_text(i);return Q
-async def AK(update,context):
-	A=update;B=f"video file size should be less then 20mb";C=23000000
-	if A.message.video.file_size>C:await A.message.reply_text(B)
-	else:D[context.user_data[a]][Z]=A.message.video.file_id;await A.message.reply_text(i);return Q
-async def A0(update,context):
-	A=update
-	if A.message.text:await A.message.reply_text('send photo')
-	else:D[context.user_data[a]][Y]=A.message.photo[-1].file_id;await A.message.reply_text(i);return Q
-async def AL(update,context):
-	A=update;B=A.message.text
-	if B in D:context.user_data[a]=B;await A.message.reply_text(Ac);return b
-	else:await A.message.reply_text('This post ID not avilable.\n Enter correct ID or press /cancel to cancel')
-async def A1(update,context):await update.message.reply_text(i);return Q
-async def AM(update,context):
-	B=update
-	try:C=B.message.text;context.user_data[W]=C;await B.message.reply_text(C);await B.message.reply_text('Pease enter the name of link button : \n\n/done')
-	except A:await B.message.reply_text('it should be text send again ');return Q
-	return U
-async def AN(update,context):
-	B=update
-	try:C=B.message.text;F=context.user_data[a];D[F][W]=C;await B.message.reply_text(B.message.text);H=[[L,M],[N,q]];await B.message.reply_text('Pease enter the name of link button :  \n\n/done',reply_markup=G(H,resize_keyboard=E,one_time_keyboard=E))
-	except A:await B.message.reply_text('it should be text send again');return Q
-	return U
-async def A2(update,context):await update.message.reply_text('Pease enter the name of link button : /done');return U
-async def A3(update,context):A=update;B=A.message.text;context.user_data[A5]=B;await A.message.reply_text('Please enter the link \n\nlink should be valid');return l
-async def AO(update,context):
-	D=update;B=context;F=D.message.text;H=B.user_data[A5]
-	try:J=B.user_data[K];C=P(H,F);J.append(C)
-	except A:I=[];C=P(H,F);I.append(C);B.user_data[K]=I
-	O=[[L,M],[N,q],[S]];await D.message.reply_text(Ad,reply_markup=G(O,resize_keyboard=E,one_time_keyboard=E));return U
-async def AP(update,context):
-	D=update;B=context;Q=B.user_data[a];F=D.message.text;H=B.user_data[A5]
-	try:J=B.user_data[K];C=P(H,F);J.append(C)
-	except A:I=[];C=P(H,F);I.append(C);B.user_data[K]=I
-	O=[[L,M],[N,q]];await D.message.reply_text(Ad,reply_markup=G(O,resize_keyboard=E,one_time_keyboard=E));return U
-async def o(update,context):
-	I=context;B=update;C=F(A9(2));R=[];a=I.user_data[K]
+from telegram import ReplyKeyboardMarkup,ReplyKeyboardRemove,Update,InlineKeyboardButton,InlineQueryResultArticle,InputTextMessageContent,Bot
+from telegram.ext import Application,CommandHandler,ContextTypes,ConversationHandler,MessageHandler,filters,InlineQueryHandler
+def random_id(n):range_start=10**(n-1);range_end=10**n-1;return randint(range_start,range_end)
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=logging.INFO)
+logger=logging.getLogger(__name__)
+current_path=Path.cwd()
+EDIT,PHOTO,MESS,NAME,LINK=range(5)
+RTPT,SETPOST,SETTIME=range(3)
+SP=range(1)
+waitpost=1
+post_count=20000000
+with open('config.toml','r')as config:
+	confd=toml.load(config)
+	try:BOT_TOKEN=confd['bot_token'];owner=str(confd['owner'])
+	except BaseException:print('fill the config.toml');exit()
+DATALIST={}
+bytename='dGhpcyBpcyB0aGUgZnJlZSB2ZXJzaW9uIG9mICBib3QgbWFkZSBieSBAcjVwcm8='
+bytename=base64.b64decode(bytename)
+nonono=str(bytename.decode())
+async def start(update,context):
+	if str(update.effective_user.id)==str(owner):reply_keyboard=[[_D,_E],[_F,_I],[_H]];await update.message.reply_text('✨! this is free version of bot contact @r5pro',reply_markup=ReplyKeyboardMarkup(reply_keyboard,resize_keyboard=_A,one_time_keyboard=_A,input_field_placeholder='welcome'))
+	else:reply_keyboard=[[InlineKeyboardButton(_M,_N)]];mark=InlineKeyboardMarkup(reply_keyboard);await update.message.reply_text('To Buy BOT Contact : @r5pro\u200c\u200c',reply_markup=mark)
+async def serachpost(update,context):user=update.message.from_user;logger.info(_V,user.first_name);await update.message.reply_text('enter any sentence or word to serch from posts\n /cancel to stop searching');return SP
+async def serachpost2(update,context):
+	text=update.message.text;user=update.message.from_user;logger.info(_V,user.first_name);found=_B
+	for (key,value) in DATALIST.items():
+		if text.lower()in value[_G].lower():await update.message.reply_text(f"found a matching post {key}");found=_A
+	if found==_B:await update.message.reply_text(f"no matching post found")
+	return ConversationHandler.END
+async def buy(update,context):reply_keyboard=[[InlineKeyboardButton(_M,_N)]];mark=InlineKeyboardMarkup(reply_keyboard);await update.message.reply_text('contact @r5pro\u200c\u200c',reply_markup=mark)
+async def newpost(update,context):
+	if str(update.effective_user.id)==str(owner):context.user_data[_C]=[];reply_keyboard=[[_D,_E],[_F,_Q]];await update.message.reply_text(_W,reply_markup=ReplyKeyboardMarkup(reply_keyboard,resize_keyboard=_A,one_time_keyboard=_A));return PHOTO
+	else:await update.message.reply_text(f"enter coreect user id in config.toml\n your ID is  : {str(update.effective_user.id)}")
+async def editpost(update,context):
+	if str(update.effective_user.id)==str(owner):await update.message.reply_text('send the post number.\n you want to edit');return EDIT
+async def photo(update,context):context.user_data[_J]=update.message.photo[-1].file_id;await update.message.reply_text(_O);return MESS
+async def video(update,context):
+	mess=f"video file size should be less then 20mb";size=23000000
+	if update.message.video.file_size>size:await update.message.reply_text(mess)
+	else:context.user_data[_K]=update.message.video.file_id;await update.message.reply_text(_O);return MESS
+async def edit_video(update,context):
+	mess=f"video file size should be less then 20mb";size=23000000
+	if update.message.video.file_size>size:await update.message.reply_text(mess)
+	else:DATALIST[context.user_data[_L]][_K]=update.message.video.file_id;await update.message.reply_text(_O);return MESS
+async def edit_photo(update,context):
+	if update.message.text:await update.message.reply_text('send photo')
+	else:DATALIST[context.user_data[_L]][_J]=update.message.photo[-1].file_id;await update.message.reply_text(_O);return MESS
+async def save_post(update,context):
+	text=update.message.text
+	if text in DATALIST:context.user_data[_L]=text;await update.message.reply_text(_W);return PHOTO
+	else:await update.message.reply_text('This post ID not avilable.\n Enter correct ID or press /cancel to cancel')
+async def skip_photo(update,context):await update.message.reply_text(_O);return MESS
+async def save_mess(update,context):
+	try:text=update.message.text;context.user_data[_G]=text;await update.message.reply_text(text);await update.message.reply_text('Pease enter the name of link button : \n\n/done')
+	except BaseException:await update.message.reply_text('it should be text send again ');return MESS
+	return NAME
+async def edit_mess(update,context):
+	try:text=update.message.text;post=context.user_data[_L];DATALIST[post][_G]=text;await update.message.reply_text(update.message.text);reply_keyboard=[[_D,_E],[_F,_Q]];await update.message.reply_text('Pease enter the name of link button :  \n\n/done',reply_markup=ReplyKeyboardMarkup(reply_keyboard,resize_keyboard=_A,one_time_keyboard=_A))
+	except BaseException:await update.message.reply_text('it should be text send again');return MESS
+	return NAME
+async def skip_mess(update,context):await update.message.reply_text('Pease enter the name of link button : /done');return NAME
+async def link_name(update,context):text=update.message.text;context.user_data[_S]=text;await update.message.reply_text('Please enter the link \n\nlink should be valid');return LINK
+async def link(update,context):
+	text=update.message.text;name=context.user_data[_S]
+	try:link=context.user_data[_C];new=InlineKeyboardButton(name,text);link.append(new)
+	except BaseException:lin=[];new=InlineKeyboardButton(name,text);lin.append(new);context.user_data[_C]=lin
+	reply_keyboard=[[_D,_E],[_F,_Q],[_H]];await update.message.reply_text(_X,reply_markup=ReplyKeyboardMarkup(reply_keyboard,resize_keyboard=_A,one_time_keyboard=_A));return NAME
+async def edit_link(update,context):
+	postid=context.user_data[_L];text=update.message.text;name=context.user_data[_S]
+	try:link=context.user_data[_C];new=InlineKeyboardButton(name,text);link.append(new)
+	except BaseException:lin=[];new=InlineKeyboardButton(name,text);lin.append(new);context.user_data[_C]=lin
+	reply_keyboard=[[_D,_E],[_F,_Q]];await update.message.reply_text(_X,reply_markup=ReplyKeyboardMarkup(reply_keyboard,resize_keyboard=_A,one_time_keyboard=_A));return NAME
+async def skip_link(update,context):
+	postid=str(random_id(2));keyboard=[];datalink=context.user_data[_C]
 	try:
-		for b in a:U=[];U.append(b);R.append(U)
-		X=T(R);X;I.user_data[K]=X
-	except A:await B.message.reply_text(Ae)
-	D[C]=I.user_data.copy();I.user_data.clear()
-	try:O=D[C][Z]
-	except A:
-		try:P=D[C][Y]
-		except A:pass
-	try:H=D[C][W]
-	except A:pass
-	try:Q=D[C][K]
-	except A:pass
-	try:await B.message.reply_video(video=O,caption=H,reply_markup=Q)
-	except A:
-		try:await B.message.reply_video(video=O,caption=H)
-		except A:
-			try:await B.message.reply_video(video=O)
-			except A:
-				try:await B.message.reply_photo(photo=P,caption=H,reply_markup=Q)
-				except A:
-					try:await B.message.reply_photo(photo=P,caption=H)
-					except A:
-						try:await B.message.reply_photo(photo=P)
-						except A:
-							try:await B.message.reply_text(H,reply_markup=Q)
-							except A:await B.message.reply_text(H)
-	c=[[L,M],[N,V],[S]];await B.message.reply_markdown_v2(Af,reply_markup=G(c,resize_keyboard=E,one_time_keyboard=E,input_field_placeholder=A6));await B.message.reply_text(f"/send {C} (time in seconds)\n/time {C} (time in minutes) send single post");return J.END
-async def AQ(update,context):await update.message.reply_text('Keyboard Removed',reply_markup=t())
-async def p(update,context):
-	B=update;C=context.user_data[a];P=[]
+		for data in datalink:key=[];key.append(data);keyboard.append(key)
+		reply_markup=InlineKeyboardMarkup(keyboard);reply_markup;context.user_data[_C]=reply_markup
+	except BaseException:await update.message.reply_text(_Y)
+	DATALIST[postid]=context.user_data.copy();context.user_data.clear()
+	try:videoid=DATALIST[postid][_K]
+	except BaseException:
+		try:photoid=DATALIST[postid][_J]
+		except BaseException:pass
+	try:text=DATALIST[postid][_G]
+	except BaseException:pass
+	try:link=DATALIST[postid][_C]
+	except BaseException:pass
+	try:await update.message.reply_video(video=videoid,caption=text,reply_markup=link)
+	except BaseException:
+		try:await update.message.reply_video(video=videoid,caption=text)
+		except BaseException:
+			try:await update.message.reply_video(video=videoid)
+			except BaseException:
+				try:await update.message.reply_photo(photo=photoid,caption=text,reply_markup=link)
+				except BaseException:
+					try:await update.message.reply_photo(photo=photoid,caption=text)
+					except BaseException:
+						try:await update.message.reply_photo(photo=photoid)
+						except BaseException:
+							try:await update.message.reply_text(text,reply_markup=link)
+							except BaseException:await update.message.reply_text(text)
+	reply_keyboard=[[_D,_E],[_F,_I],[_H]];await update.message.reply_markdown_v2(_Z,reply_markup=ReplyKeyboardMarkup(reply_keyboard,resize_keyboard=_A,one_time_keyboard=_A,input_field_placeholder=_T));await update.message.reply_text(f"/send {postid} (time in seconds)\n/time {postid} (time in minutes) send single post");return ConversationHandler.END
+async def hidekey(update,context):await update.message.reply_text('Keyboard Removed',reply_markup=ReplyKeyboardRemove())
+async def edit_skip_link(update,context):
+	postid=context.user_data[_L];keyboard=[]
 	try:
-		for Q in ontext.user_data[K]:R=[];R.append(Q);P.append(R)
-		U=T(P);D[C][K]=U
-	except A:await B.message.reply_text(Ae)
-	Q=D[C]
-	try:H=D[C][Z]
-	except A:
-		try:I=D[C][Y]
-		except A:pass
-	try:F=D[C][W]
-	except A:pass
-	try:O=D[C][K]
-	except A:pass
-	try:await B.message.reply_video(video=H,caption=F,reply_markup=O)
-	except A:
-		try:await B.message.reply_video(video=H,caption=F)
-		except A:
-			try:await B.message.reply_video(video=H)
-			except A:
-				try:await B.message.reply_photo(photo=I,caption=F,reply_markup=O)
-				except A:
-					try:await B.message.reply_photo(photo=I,caption=F)
-					except A:
-						try:await B.message.reply_photo(photo=I)
-						except A:
-							try:await B.message.reply_text(F,reply_markup=O)
-							except A:await B.message.reply_text(F)
-	X=[[L,M],[N,V],[S]];await B.message.reply_markdown_v2(Af,reply_markup=G(X,resize_keyboard=E,one_time_keyboard=E,input_field_placeholder=A6));await B.message.reply_text(f"/send {C} (time in seconds)\n/time {C} (time in minutes) send single post");return J.END
-async def d(update,context):A=update;B=A.message.from_user;C=[[L,M],[N,V],[S]];O.info(Ag,B.first_name);await A.message.reply_text('Bye!.',reply_markup=G(C,resize_keyboard=E,one_time_keyboard=E,input_field_placeholder=A6));return J.END
-async def e(update,context):A=update;B=A.message.from_user;O.info(Ag,B.first_name);await A.message.reply_text('U HAVE LEFT in middle of post press /cancel')
-async def AR(update,context):
-	V='True';I=context;B=update;a=B.message.from_user;S=None;b=f(B.message.chat_id);O.info(Ah,a.first_name);await B.message.reply_text(n)
-	if F(B.effective_user.id)==F(R):
-		C=I.args[0];d=float(I.args[1])
-		try:J=D[C][Z]
-		except A:
-			try:L=D[C][Y]
-			except A:pass
-		try:G=D[C][W]
-		except A:pass
-		try:M=D[C][K]
-		except A:pass
-		D[C][r]=V;U=c;await B.message.reply_text(f"stop by /stop {C}")
-		while D[C][r]==V and U>0:
-			if F(B.effective_user.id)==F(R):
-				try:E=await B.message.reply_video(video=J,caption=G,reply_markup=M,quote=H)
-				except A:
-					try:E=await B.message.reply_video(video=J,caption=G,quote=H)
-					except A:
-						try:E=await B.message.reply_video(video=J,quote=H)
-						except A:
-							try:E=await B.message.reply_photo(photo=L,caption=G,reply_markup=M,quote=H)
-							except A:
-								try:E=await B.message.reply_photo(photo=L,caption=G,quote=H)
-								except A:
-									try:E=await B.message.reply_photo(photo=L,quote=H)
-									except A:
-										try:E=await B.message.reply_text(G,reply_markup=M,quote=H)
-										except A:E=await B.message.reply_text(G,quote=H)
-				U-=1;await s(d*X);S=E.message_id
-				try:await I.bot.delete_message(b,S)
-				except:pass
+		for data in ontext.user_data[_C]:key=[];key.append(data);keyboard.append(key)
+		reply_markup=InlineKeyboardMarkup(keyboard);DATALIST[postid][_C]=reply_markup
+	except BaseException:await update.message.reply_text(_Y)
+	data=DATALIST[postid]
+	try:videoid=DATALIST[postid][_K]
+	except BaseException:
+		try:photoid=DATALIST[postid][_J]
+		except BaseException:pass
+	try:text=DATALIST[postid][_G]
+	except BaseException:pass
+	try:link=DATALIST[postid][_C]
+	except BaseException:pass
+	try:await update.message.reply_video(video=videoid,caption=text,reply_markup=link)
+	except BaseException:
+		try:await update.message.reply_video(video=videoid,caption=text)
+		except BaseException:
+			try:await update.message.reply_video(video=videoid)
+			except BaseException:
+				try:await update.message.reply_photo(photo=photoid,caption=text,reply_markup=link)
+				except BaseException:
+					try:await update.message.reply_photo(photo=photoid,caption=text)
+					except BaseException:
+						try:await update.message.reply_photo(photo=photoid)
+						except BaseException:
+							try:await update.message.reply_text(text,reply_markup=link)
+							except BaseException:await update.message.reply_text(text)
+	reply_keyboard=[[_D,_E],[_F,_I],[_H]];await update.message.reply_markdown_v2(_Z,reply_markup=ReplyKeyboardMarkup(reply_keyboard,resize_keyboard=_A,one_time_keyboard=_A,input_field_placeholder=_T));await update.message.reply_text(f"/send {postid} (time in seconds)\n/time {postid} (time in minutes) send single post");return ConversationHandler.END
+async def cancel(update,context):user=update.message.from_user;reply_keyboard=[[_D,_E],[_F,_I],[_H]];logger.info(_a,user.first_name);await update.message.reply_text('Bye!.',reply_markup=ReplyKeyboardMarkup(reply_keyboard,resize_keyboard=_A,one_time_keyboard=_A,input_field_placeholder=_T));return ConversationHandler.END
+async def leftinmiddle(update,context):user=update.message.from_user;logger.info(_a,user.first_name);await update.message.reply_text('U HAVE LEFT in middle of post press /cancel')
+async def send(update,context):
+	B='videoid';A='True';user=update.message.from_user;messageid=None;chatid=int(update.message.chat_id);logger.info(_b,user.first_name);await update.message.reply_text(nonono)
+	if str(update.effective_user.id)==str(owner):
+		postsendid=context.args[0]
+		try:wait=float(context.args[1])
+		except:await update.message.reply_text('enter command with time');return
+		try:text=DATALIST[postsendid][_G];link=DATALIST[postsendid][_C]
+		except BaseException:pass
+		try:photoid=DATALIST[postsendid][_J]
+		except:
+			try:videoid=DATALIST[postsendid][_K]
+			except BaseException:pass
+		DATALIST[postsendid][_R]=A;post_count_copy=post_count;await update.message.reply_text(f"stop by /stop {postsendid}")
+		for xx in range(post_count_copy):
+			if DATALIST[postsendid][_R]==A:
+				if str(update.effective_user.id)==str(owner):
+					if B in locals():
+						if _G and _C in locals():messag=await update.message.reply_video(video=videoid,caption=text,reply_markup=link,quote=_B)
+						elif B and _G in locals():messag=await update.message.reply_video(video=videoid,caption=text,quote=_B)
+						else:messag=await update.message.reply_video(video=videoid,quote=_B)
+					elif'photoid'in locals():
+						if _G and _C in locals():messag=await update.message.reply_photo(photo=photoid,caption=text,reply_markup=link,quote=_B)
+						elif _G in locals():messag=await update.message.reply_photo(photo=photoid,caption=text,quote=_B)
+						else:messag=await update.message.reply_photo(photo=photoid,quote=_B)
+					elif _C in locals():messag=await update.message.reply_text(text,reply_markup=link,quote=_B)
+					else:messag=await update.message.reply_text(text,quote=_B)
+					post_count_copy-=1;await sleep(wait*waitpost);messageid=messag.message_id
+					try:await context.bot.delete_message(chatid,messageid);await sleep(1)
+					except:pass
 			else:break
-		if D[C][r]==V:await B.message.reply_text(f"{c} : message has been send");N=[[P(g,h)]];Q=T(N);await B.message.reply_text(A7,reply_markup=Q)
-	else:N=[[P(g,h)]];Q=T(N);await B.message.reply_text(A7,reply_markup=Q)
-async def AS(update,context):
-	M=context;B=update;N=B.message.from_user;O.info(Ah,N.first_name);await B.message.reply_text(n)
-	if F(B.effective_user.id)==F(R):
-		E=M.args[0];G=F(M.args[1])
-		try:G=f(G)*60
-		except A:await B.message.reply_text('enter time un minutes 60 90 120')
-		try:I=D[E][Z]
-		except A:
-			try:J=D[E][Y]
-			except A:pass
-		try:C=D[E][W]
-		except A:pass
-		try:L=D[E][K]
-		except A:pass
-		await B.message.reply_text(f"post will be send ater {G/60} minutes");await s(G)
-		if F(B.effective_user.id)==F(R):
-			try:await B.message.reply_video(video=I,caption=C,reply_markup=L,quote=H)
-			except A:
-				try:await B.message.reply_video(video=I,caption=C,quote=H)
-				except A:
-					try:await B.message.reply_video(video=I,quote=H)
-					except A:
-						try:await B.message.reply_photo(photo=J,caption=C,reply_markup=L,quote=H)
-						except A:
-							try:await B.message.reply_photo(photo=J,caption=C,quote=H)
-							except A:
-								try:await B.message.reply_photo(photo=J,quote=H)
-								except A:
-									try:await B.message.reply_text(C,reply_markup=L,quote=H)
-									except A:await B.message.reply_text(C,quote=H)
-	else:Q=[[P(g,h)]];S=T(Q);await B.message.reply_text(A7,reply_markup=S)
-async def AT(update,context):
-	B=update;C=B.message.from_user;O.info('User %s stopped the post.',C.first_name);await B.message.reply_text(n)
-	if F(B.effective_user.id)==F(R):
-		try:E=context.args[0];D[E][r]='false';await B.message.reply_text('stopped')
-		except A:await B.message.reply_text('post stopped')
-async def AU(update,context):A=update;B=A.message.from_user;O.info('User %s pressed post setting.',B.first_name);await A.message.reply_text('ENTER THE NUMBER OF POST YOU WANT IN A LOOP\n\nthis will only change for /send command \n press /cancel if you dont want to change it.');return w
-async def AV(update,context):
-	B=update;A=B.message.text;global c
-	try:A=f(A)
+		if DATALIST[postsendid][_R]==A:await update.message.reply_text(f"{post_count} : message has been send");reply_keyboard=[[InlineKeyboardButton(_M,_N)]];mark=InlineKeyboardMarkup(reply_keyboard);await update.message.reply_text(_U,reply_markup=mark)
+	else:reply_keyboard=[[InlineKeyboardButton(_M,_N)]];mark=InlineKeyboardMarkup(reply_keyboard);await update.message.reply_text(_U,reply_markup=mark)
+async def sendonce(update,context):
+	user=update.message.from_user;logger.info(_b,user.first_name);await update.message.reply_text(nonono)
+	if str(update.effective_user.id)==str(owner):
+		postsendid=context.args[0];wait=str(context.args[1])
+		try:wait=int(wait)*60
+		except BaseException:await update.message.reply_text('enter time un minutes 60 90 120')
+		try:videoid=DATALIST[postsendid][_K]
+		except BaseException:
+			try:photoid=DATALIST[postsendid][_J]
+			except BaseException:pass
+		try:text=DATALIST[postsendid][_G]
+		except BaseException:pass
+		try:link=DATALIST[postsendid][_C]
+		except BaseException:pass
+		await update.message.reply_text(f"post will be send ater {wait/60} minutes");await sleep(wait)
+		if str(update.effective_user.id)==str(owner):
+			try:await update.message.reply_video(video=videoid,caption=text,reply_markup=link,quote=_B)
+			except BaseException:
+				try:await update.message.reply_video(video=videoid,caption=text,quote=_B)
+				except BaseException:
+					try:await update.message.reply_video(video=videoid,quote=_B)
+					except BaseException:
+						try:await update.message.reply_photo(photo=photoid,caption=text,reply_markup=link,quote=_B)
+						except BaseException:
+							try:await update.message.reply_photo(photo=photoid,caption=text,quote=_B)
+							except BaseException:
+								try:await update.message.reply_photo(photo=photoid,quote=_B)
+								except BaseException:
+									try:await update.message.reply_text(text,reply_markup=link,quote=_B)
+									except BaseException:await update.message.reply_text(text,quote=_B)
+	else:reply_keyboard=[[InlineKeyboardButton(_M,_N)]];mark=InlineKeyboardMarkup(reply_keyboard);await update.message.reply_text(_U,reply_markup=mark)
+async def stoppost(update,context):
+	user=update.message.from_user;logger.info('User %s stopped the post.',user.first_name);await update.message.reply_text(nonono)
+	if str(update.effective_user.id)==str(owner):
+		try:poststopid=context.args[0];DATALIST[poststopid][_R]='false';await update.message.reply_text('stopped')
+		except BaseException:await update.message.reply_text('post stopped')
+async def postset(update,context):user=update.message.from_user;logger.info('User %s pressed post setting.',user.first_name);await update.message.reply_text('ENTER THE NUMBER OF POST YOU WANT IN A LOOP\n\nthis will only change for /send command \n press /cancel if you dont want to change it.');return SETPOST
+async def postset1(update,context):
+	text=update.message.text;global post_count
+	try:text=int(text)
 	except:pass
-	if Aa(A,f):c=f(A);C=[[L,M],[N,V],[S]];D=G(C);await B.message.reply_text(f"Post count Changed to : {F(A)}",reply_markup=G(C,resize_keyboard=E,one_time_keyboard=E,input_field_placeholder=j));return J.END
-	else:await B.message.reply_text('enter digits only')
-async def AW(update,context):A=update;B=A.message.from_user;O.info('User %s pressed time.',B.first_name);await A.message.reply_text('ENTER THE TIME FORMAT Hours, Minutes, Seconds \n\nthis will only change for /send command \n press /cancel if you dont want to change it.');return x
-async def AX(update,context):
-	H='enter one of these option\n Hours, Minutes, Seconds only';B=update;C=B.message.text.lower();global X
-	if Aa(C,F):
-		if C[0]=='h':X=3600;A=[[L,M],[N,V],[S]];D=G(A);await B.message.reply_text('Time Format Changed TO Hours',reply_markup=G(A,resize_keyboard=E,one_time_keyboard=E,input_field_placeholder=j));return J.END
-		elif C[0]=='m':X=60;A=[[L,M],[N,V],[S]];D=G(A);await B.message.reply_text('Time Format Changed TO Minutes',reply_markup=G(A,resize_keyboard=E,one_time_keyboard=E,input_field_placeholder=j));return J.END
-		elif C[0]=='s':X=1;A=[[L,M],[N,V],[S]];D=G(A);await B.message.reply_text('Time Format Changed TO SEC',reply_markup=G(A,resize_keyboard=E,one_time_keyboard=E,input_field_placeholder=j));return J.END
-		else:await B.message.reply_text(H)
-	else:await B.message.reply_text(H)
-async def Ak(update,context):await update.message.reply_text('Seting Saved');return J.END
-async def AY(update,context):A=update;C=A.message.from_user;O.info('User %s pressed setting.',C.first_name);B=[['Post Count','Time Setting']];D=G(B);await A.message.reply_text('Settings for Bot!',reply_markup=G(B,resize_keyboard=E,one_time_keyboard=E,input_field_placeholder=j));return v
-def AZ():O='^(✅Done)$';G='^(📌 make new post)$';F='done';E='skip';D='cancel';A=A8.builder().token(AB).build();A.add_handler(I('start',AC));A.add_handler(I('send',AR,block=H));A.add_handler(I('stop',AT));A.add_handler(I('rk',AQ));A.add_handler(I('time',AS));A.add_handler(C(B.Regex('^(🤖 Buy bot)$'),AF));K=J(entry_points=[C(B.Regex('^(Setting)$'),AY)],states={v:[C(B.Regex('^(Post Count)$')&~ B.COMMAND,AU),C(B.Regex('^(Time Setting)$')&~ B.COMMAND,AW)],w:[C(B.TEXT&~ B.COMMAND,AV)],x:[C(B.TEXT&~ B.COMMAND,AX)]},fallbacks=[I(D,d)]);L=J(entry_points=[C(B.Regex('^(Search Old Post)$'),AD)],states={y:[C(B.TEXT&~ B.COMMAND,AE)]},fallbacks=[I(D,d)]);M=J(entry_points=[C(B.Regex('^(📌 make new post|Post)$'),AG)],states={b:[C(B.PHOTO&~ B.COMMAND,AI),I(E,A1),C(B.VIDEO&~ B.COMMAND,AJ),C(B.ALL&~ B.COMMAND,e)],Q:[C(B.Regex(G)&~ B.COMMAND,e),C(B.TEXT&~ B.COMMAND,AM),I(E,A2)],U:[C(B.Regex(G)&~ B.COMMAND,e),C(B.Regex(O),o),C(B.TEXT&~ B.COMMAND,A3),I(F,o)],l:[C(B.Regex(G)&~ B.COMMAND,e),C(B.TEXT&~ B.COMMAND,AO),I(F,o)]},fallbacks=[I(D,d)]);N=J(entry_points=[C(B.Regex('^(📝 edit post|edit post)$'),AH)],states={u:[C(B.TEXT&~ B.COMMAND,AL)],b:[C(B.TEXT&~ B.COMMAND,A0),C(B.PHOTO&~ B.COMMAND,A0),C(B.VIDEO&~ B.COMMAND,AK),I(E,A1)],Q:[C(B.TEXT&~ B.COMMAND,AN),I(E,A2)],U:[C(B.Regex(O),p),C(B.TEXT&~ B.COMMAND,A3),I(F,p)],l:[C(B.TEXT&~ B.COMMAND,AP),I(F,p)]},fallbacks=[I(D,d)]);A.add_handler(M);A.add_handler(K);A.add_handler(N);A.add_handler(L);A.run_polling()
-if __name__=='__main__':AZ()
+	if isinstance(text,int):post_count=int(text);reply_keyboard=[[_D,_E],[_F,_I],[_H]];mark=ReplyKeyboardMarkup(reply_keyboard);await update.message.reply_text(f"Post count Changed to : {str(text)}",reply_markup=ReplyKeyboardMarkup(reply_keyboard,resize_keyboard=_A,one_time_keyboard=_A,input_field_placeholder=_P));return ConversationHandler.END
+	else:await update.message.reply_text('enter digits only')
+async def timeset(update,context):user=update.message.from_user;logger.info('User %s pressed time.',user.first_name);await update.message.reply_text('ENTER THE TIME FORMAT Hours, Minutes, Seconds \n\nthis will only change for /send command \n press /cancel if you dont want to change it.');return SETTIME
+async def timeset1(update,context):
+	A='enter one of these option\n Hours, Minutes, Seconds only';text=update.message.text.lower();global waitpost
+	if isinstance(text,str):
+		if text[0]=='h':waitpost=3600;reply_keyboard=[[_D,_E],[_F,_I],[_H]];mark=ReplyKeyboardMarkup(reply_keyboard);await update.message.reply_text('Time Format Changed TO Hours',reply_markup=ReplyKeyboardMarkup(reply_keyboard,resize_keyboard=_A,one_time_keyboard=_A,input_field_placeholder=_P));return ConversationHandler.END
+		elif text[0]=='m':waitpost=60;reply_keyboard=[[_D,_E],[_F,_I],[_H]];mark=ReplyKeyboardMarkup(reply_keyboard);await update.message.reply_text('Time Format Changed TO Minutes',reply_markup=ReplyKeyboardMarkup(reply_keyboard,resize_keyboard=_A,one_time_keyboard=_A,input_field_placeholder=_P));return ConversationHandler.END
+		elif text[0]=='s':waitpost=1;reply_keyboard=[[_D,_E],[_F,_I],[_H]];mark=ReplyKeyboardMarkup(reply_keyboard);await update.message.reply_text('Time Format Changed TO SEC',reply_markup=ReplyKeyboardMarkup(reply_keyboard,resize_keyboard=_A,one_time_keyboard=_A,input_field_placeholder=_P));return ConversationHandler.END
+		else:await update.message.reply_text(A)
+	else:await update.message.reply_text(A)
+async def taskdone(update,context):await update.message.reply_text('Seting Saved');return ConversationHandler.END
+async def setting(update,context):user=update.message.from_user;logger.info('User %s pressed setting.',user.first_name);reply_keyboard=[['Post Count','Time Setting']];mark=ReplyKeyboardMarkup(reply_keyboard);await update.message.reply_text('Settings for Bot!',reply_markup=ReplyKeyboardMarkup(reply_keyboard,resize_keyboard=_A,one_time_keyboard=_A,input_field_placeholder=_P));return RTPT
+def main():E='^(✅Done)$';D='^(📌 make new post)$';C='done';B='skip';A='cancel';application=Application.builder().token(BOT_TOKEN).build();application.add_handler(CommandHandler('start',start));application.add_handler(CommandHandler('send',send,block=_B));application.add_handler(CommandHandler('stop',stoppost));application.add_handler(CommandHandler('rk',hidekey));application.add_handler(CommandHandler('time',sendonce));application.add_handler(MessageHandler(filters.Regex('^(🤖 Buy bot)$'),buy));post_handler=ConversationHandler(entry_points=[MessageHandler(filters.Regex('^(Setting)$'),setting)],states={RTPT:[MessageHandler(filters.Regex('^(Post Count)$')&~ filters.COMMAND,postset),MessageHandler(filters.Regex('^(Time Setting)$')&~ filters.COMMAND,timeset)],SETPOST:[MessageHandler(filters.TEXT&~ filters.COMMAND,postset1)],SETTIME:[MessageHandler(filters.TEXT&~ filters.COMMAND,timeset1)]},fallbacks=[CommandHandler(A,cancel)]);search_handler=ConversationHandler(entry_points=[MessageHandler(filters.Regex('^(Search Old Post)$'),serachpost)],states={SP:[MessageHandler(filters.TEXT&~ filters.COMMAND,serachpost2)]},fallbacks=[CommandHandler(A,cancel)]);add_handler=ConversationHandler(entry_points=[MessageHandler(filters.Regex('^(📌 make new post|Post)$'),newpost)],states={PHOTO:[MessageHandler(filters.PHOTO&~ filters.COMMAND,photo),CommandHandler(B,skip_photo),MessageHandler(filters.VIDEO&~ filters.COMMAND,video),MessageHandler(filters.ALL&~ filters.COMMAND,leftinmiddle)],MESS:[MessageHandler(filters.Regex(D)&~ filters.COMMAND,leftinmiddle),MessageHandler(filters.TEXT&~ filters.COMMAND,save_mess),CommandHandler(B,skip_mess)],NAME:[MessageHandler(filters.Regex(D)&~ filters.COMMAND,leftinmiddle),MessageHandler(filters.Regex(E),skip_link),MessageHandler(filters.TEXT&~ filters.COMMAND,link_name),CommandHandler(C,skip_link)],LINK:[MessageHandler(filters.Regex(D)&~ filters.COMMAND,leftinmiddle),MessageHandler(filters.TEXT&~ filters.COMMAND,link),CommandHandler(C,skip_link)]},fallbacks=[CommandHandler(A,cancel)]);edit_handler=ConversationHandler(entry_points=[MessageHandler(filters.Regex('^(📝 edit post|edit post)$'),editpost)],states={EDIT:[MessageHandler(filters.TEXT&~ filters.COMMAND,save_post)],PHOTO:[MessageHandler(filters.TEXT&~ filters.COMMAND,edit_photo),MessageHandler(filters.PHOTO&~ filters.COMMAND,edit_photo),MessageHandler(filters.VIDEO&~ filters.COMMAND,edit_video),CommandHandler(B,skip_photo)],MESS:[MessageHandler(filters.TEXT&~ filters.COMMAND,edit_mess),CommandHandler(B,skip_mess)],NAME:[MessageHandler(filters.Regex(E),edit_skip_link),MessageHandler(filters.TEXT&~ filters.COMMAND,link_name),CommandHandler(C,edit_skip_link)],LINK:[MessageHandler(filters.TEXT&~ filters.COMMAND,edit_link),CommandHandler(C,edit_skip_link)]},fallbacks=[CommandHandler(A,cancel)]);application.add_handler(add_handler);application.add_handler(post_handler);application.add_handler(edit_handler);application.add_handler(search_handler);application.run_polling()
+if __name__=='__main__':main()
