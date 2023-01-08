@@ -34,6 +34,7 @@ For any help join the [telegram group](htpps://t.me/nimmadev)
 
 - /start - the bot and displays buttons for making and editing posts.
 - /send - after making a post you will get a post number. Use /send post_number interval_time [time in seconds] . it will resend post in loop of interval_time
+- /sendch - /sendch postid time_in_seconds channel_id [channel id look like this -10057568876 or 575568876] add bot to channel for this
 - /time - use this to send post once after a wait time. /time post_number time . example: /time 87 65 this will send post after 1 hour 5 minutes
 - /stop - stop a running post /stop post_number
 - /rk - remove buttons if you used the /start command in group
